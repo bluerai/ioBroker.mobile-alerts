@@ -1,0 +1,35 @@
+{
+	"common": {
+		"name": "mobile-alerts",
+		"version": "0.0.1",
+		"title": "Mobile Alerts",
+		"desc": {
+			"en": "Mobile Alerts for ioBroker",
+			"de": "Mobile Alerts für ioBroker"
+		},
+		"platform": "Javascript/Node.js",
+		"mode": "schedule",
+		"schedule": "*/7 * * * *",
+		"loglevel": "debug",
+		"icon": "mobile-alerts.png",
+		"enabled": true,
+		"extIcon": "/adapter/mobile-alerts/mobilealerts.png",
+		"keywords": ["ioBroker",
+		"mobile-alerts",
+		"Smart Home",
+		"Mobile Alerts",
+		"home automation"],
+		"readme": "https://github.com/bluerai/iobroker.mobilealerts/blob/master/README.md",
+		"localLink": "http://%hostname%%path%?phoneId=%phoneId%",
+		"type": "iot-systems"
+	},
+	"native": {
+		"phoneId": "99999999999999",
+		"hostname": "measurements.mobile-alerts.eu",
+		"path": "/Home/SensorsOverview",
+		"extractNumbers": true
+	},
+	"objects": [],
+	"instanceObjects": []
+
+}

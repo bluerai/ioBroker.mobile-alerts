@@ -1,0 +1,45 @@
+{
+  "name": "iobroker.mobile-alerts",
+  "version": "0.0.1",
+  "description": "Mobile Alerts for ioBroker",
+  "author": {
+    "name": "bluearai",
+    "email": "bluerai@gmx.de"
+  },
+  "contributors": [
+    {
+      "name": "bluearai",
+      "email": "bluerai@gmx.de"
+    }
+  ],
+  "homepage": "https://github.com/bluerai/iobroker.mobile-alerts.git",
+  "license": "MIT",
+  "keywords": [
+    "ioBroker",
+    "mobile-alerts",
+    "Smart Home",
+    "mobile alerts",
+    "home automation"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bluerai/iobroker.mobile-alerts.git"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+      "grunt": "^0.4.5",
+      "grunt-replace": "^0.9.3",
+      "grunt-contrib-jshint": "^0.11.2",
+      "grunt-jscs": "^2.0.0",
+      "grunt-http": "^1.6.0",
+      "grunt-contrib-clean": "^0.6.0",
+      "grunt-contrib-compress": "^0.13.0",
+      "grunt-contrib-copy": "^0.8.0",
+      "grunt-exec": "^0.4.6"
+  },
+  "bugs": {
+    "url": "https://github.com/bluerai/iobroker.mobile-alerts/issues"
+  },
+  "readmeFilename": "README.md"
+}
