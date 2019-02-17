@@ -29,13 +29,15 @@
 	// Dictionary (systemDictionary is global variable from adapter-settings.js)
   systemDictionary = {
     "Mobile Alerts adapter settings" : {
-      "de" : "Beispiel",
-      "ru" : "Пример"
+      "de" : "Einstellungen für den Mobile-Alerts-Adapter "
     },
-    "on save adapter restarts with new config immediately" : {
-      "de" : "Beim Speichern von Einstellungen der Adapter wird sofort neu gestartet.",
-      "ru" : "Сразу после сохранения настроек драйвер перезапуститься с новыми значениями"
-    }
+    "On save adapter restarts with new config immediately" : {
+      "de" : "Beim Speichern der Einstellungen der Adapter wird neu gestartet."
+    },
+    "When selected the pure value is saved (useful if you want to do some further calculations)" : {
+      "de" : "Falls ausgewählt wird der reine Zahlenwert gespeichert (nützlich wenn weitere Berechnungen erfolgen sollen)."
+    },
+    "Extract numbers" : { "de" : "Zahlen extrahieren"}
   };
 
   // the function loadSettings has to exist ...
@@ -93,7 +95,6 @@
       <td><input class="value" type="text" id="phoneId" size="20" /></td>
     </tr>
 
-
     <tr>
       <td><label for="hostname" class="translate">Hostname</label></td>
       <td><input class="value" type="text" id="hostname" size="60" /></td>
@@ -105,12 +106,14 @@
     </tr>
 
     <tr>
-      <td><label for="extractNumbers" class="translate">Zahlen extrahieren</label></td>
+      <td><label for="extractNumbers" class="translate">Zahlen extrahieren</label>*) </td>
       <td><input class="value" type="checkbox" id="extractNumbers" /></td>
     </tr>
 
   </table>
-  <p class="translate">on save adapter restarts with new config immediately</p>
+  <p class="translate">When selected the pure value is saved (useful if you want to do some further calculations)</p>
+  <br/><br/>
+  <p class="translate">On save adapter restarts with new config immediately</p>
 </div>
 
 </html>
