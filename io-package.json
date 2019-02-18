@@ -11,7 +11,7 @@
         	"main": "main.js",
 		"mode": "schedule",
 		"schedule": "*/7 * * * *",
-		"loglevel": "debug",
+		"loglevel": "info",
 		"icon": "mobile-alerts.png",
 		"enabled": true,
 		"extIcon": "https://raw.githubusercontent.com/bluerai/ioBroker.mobile-alerts/master/admin/mobile-alerts.png",

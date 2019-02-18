@@ -29,11 +29,14 @@ Hinweis:
 
 - Es können mehrere Instanzen für verschiedene PhoneIDs erzeugt werden.
 
-- in der Übersicht kann die Webseite "Überblick für Phone ID ???????" augerufen werden. Die
+- in der Übersicht kann die Webseite "Überblick für Phone ID ???????" aufgerufen werden. Die
   Werte werden dieser Seite entnommen
   
 - Wurde bisher her nur mit eingen der Sensoren für Temperatur und Luftfeuchte, sowie 
   mit einer Wetterstation getestet. Hinweise und Ergänzungen zu weiteren Sensoren sind 
   willkommen.
+  
+  
+  Stand: 18.02.2019
 
 
