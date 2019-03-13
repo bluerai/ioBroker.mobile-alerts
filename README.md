@@ -24,12 +24,11 @@ Manuelle Installation
   Objekte erzeugt werden. Siehe in der ioBroker-Gui unter Objekte >> "mobile-alerts.0"
   
   
-  
 Hinweis:
 
 - Es können mehrere Instanzen für verschiedene PhoneIDs erzeugt werden.
 
-- in der Übersicht kann die Webseite "Überblick für Phone ID ???????" aufgerufen werden. Die
+- In der Übersicht kann die Webseite "Überblick für Phone ID ..." aufgerufen werden. Die
   Werte werden dieser Seite entnommen
   
 - Wurde bisher her nur mit eingen der Sensoren für Temperatur und Luftfeuchte, sowie 
