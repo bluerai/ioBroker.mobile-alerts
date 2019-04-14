@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Mobile Alerts for ioBroker",
   "author": {
-    "name": "bluearai",
+    "name": "Rai Blue",
     "email": "bluerai@gmx.de"
   },
   "homepage": "https://github.com/bluerai/ioBroker.mobile-alerts.git",
@@ -20,6 +20,9 @@
     "url": "https://github.com/bluerai/ioBroker.mobile-alerts.git"
   },
   "dependencies": {
+  "request" : ~2.85.0,
+  "xml2js" : ~0.1.13
+  
   },
   "devDependencies": {
       "grunt": "^0.4.5",
