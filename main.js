@@ -265,7 +265,6 @@ function formatNum(s) {
 		s = s.replace("%", "");
 		s = s.replace(",", ".");
 		s = parseFloat(s);
-		s = ("" + s).replace(".", ",");
 	}
 	return s;
 }
