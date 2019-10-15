@@ -18,7 +18,7 @@ Installation des Adapters:
     
     sudo chown -R iobroker.iobroker /opt/iobroker/iobroker.mobile-alerts
 
-- ioBroker starten: sudo iobroker start
+- ioBroker starten: iobroker start
 
 Konfiguration:
 
