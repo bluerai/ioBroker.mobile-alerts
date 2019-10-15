@@ -18,12 +18,12 @@ Konfiguration:
 
 - In der WebGui von ioBroker unter "Adapter" eine Instanz von "Mobile Alerts" erzeugen.
 
-- In der Adapterkonfiguration muss die PhoneId eingetragen werden.
+- In der Adapterkonfiguration muss die PhoneID eingetragen werden.
   Die PhoneID kann in der Mobile-Alerts-App (für iOS bzw. Android) unter "Einstellungen" 
   gefunden werden.
   
 - Nach dem Speichern der PhoneID sollten innerhalb von ca. 7 Minuten (je nach Einstellung der Zeitplanung) die
-  entsprechenden Objekte erzeugt und mit den aktuellen Daten werden 
+  entsprechenden Objekte erzeugt und mit den aktuellen Daten gefüllt werden 
   (siehe in der ioBroker-Gui unter Objekte >> "mobile-alerts.0").
   
   
