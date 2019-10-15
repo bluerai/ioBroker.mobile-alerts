@@ -2,19 +2,23 @@
 
 Einfacher Adapter, um regelmäßig Werte vom Mobile Alerts Server herunterzuladen.
 
+Installation des Adapters:
 
-Manuelle Installation
+- ioBroker stoppen: ioBroker stop
 
-- Kopiere alle Dateien in das Verzeichnis /opt/iobroker/iobroker.mobile-alerts.
+- Alle Dateien in das Verzeichnis /opt/iobroker/iobroker.mobile-alerts:
+  
+  >> iobroker url "https://github.com/bluerai/ioBroker.mobile-alerts.git"
 
-- Berechtigungen, User und Group anpasssen:
+- ggf. Berechtigungen, User und Group anpasssen:
 
-	sudo chmod -R 775  /opt/iobroker/iobroker.mobile-alerts
-	
-	sudo chown -R iobroker.iobroker /opt/iobroker/iobroker.mobile-alerts
+  >> sudo chmod -R 775  /opt/iobroker/iobroker.mobile-alerts
+  
+  >> sudo chown -R iobroker.iobroker /opt/iobroker/iobroker.mobile-alerts
 
 - ioBroker starten: sudo ioBroker start
-  oder iobroker neu starten: sudo iobroker restart
+
+Konfiguration:
 
 - In der WebGui von ioBroker unter "Adapter" eine Instanz von "Mobile Alerts" erzeugen.
 
@@ -22,11 +26,12 @@ Manuelle Installation
   Die PhoneID kann in der Mobile-Alerts-App (für iOS bzw. Android) unter "Einstellungen" 
   gefunden werden.
   
-- Nach dem Speichern der PhoneID sollten innerhalb von ca. 7 Minuten die entsprechenden 
-  Objekte erzeugt werden. Siehe in der ioBroker-Gui unter Objekte >> "mobile-alerts.0"
+- Nach dem Speichern der PhoneID sollten innerhalb von ca. 3 Minuten (je nach Einstellung der Zeitplanung) die
+  entsprechenden Objekte erzeugt und mit den aktuellen Daten werden 
+  (siehe in der ioBroker-Gui unter Objekte >> "mobile-alerts.0").
   
   
-Hinweis:
+Hinweise:
 
 - Es können mehrere Instanzen für verschiedene PhoneIDs erzeugt werden.
 
