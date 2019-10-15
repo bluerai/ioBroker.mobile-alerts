@@ -5,11 +5,13 @@ Einfacher Adapter, um regelmäßig Werte vom Mobile Alerts Server herunterzulade
 
 Manuelle Installation
 
-- Kopiere alle Dateien in das Verzeichnis /opt/iobroker/iobroker.mobile-alerts
+- Kopiere alle Dateien in das Verzeichnis /opt/iobroker/iobroker.mobile-alerts.
 
 - Berechtigungen, User und Group anpasssen:
+
 	sudo chmod -R 775  /opt/iobroker/iobroker.mobile-alerts
-	sudo chown -R iobroker.iobroker  /opt/iobroker/iobroker.mobile-alerts
+	
+	sudo chown -R iobroker.iobroker /opt/iobroker/iobroker.mobile-alerts
 
 - ioBroker starten: sudo ioBroker start
   oder iobroker neu starten: sudo iobroker restart
@@ -28,14 +30,14 @@ Hinweis:
 
 - Es können mehrere Instanzen für verschiedene PhoneIDs erzeugt werden.
 
-- In der Übersicht kann die Webseite "Überblick für Phone ID ..." aufgerufen werden. Die
-  Werte werden dieser Seite entnommen
+- Wenn eine aktive Phone-ID spezifiziert wurde, kann in der Übersicht die Webseite "Überblick für Phone ID ..." aufgerufen
+  werden. Die Werte werden dieser Seite entnommen.
   
 - Wurde bisher her nur mit eingen der Sensoren für Temperatur und Luftfeuchte, sowie 
   mit einer Wetterstation getestet. Hinweise und Ergänzungen zu weiteren Sensoren sind 
   willkommen.
   
   
-  Stand: 18.02.2019
+  Stand: 15.10.2019
 
 
