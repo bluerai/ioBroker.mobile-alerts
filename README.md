@@ -12,12 +12,6 @@ Installation des Adapters:
   
     iobroker url "https://github.com/bluerai/ioBroker.mobile-alerts.git"
 
-- ggf. Berechtigungen, User und Group anpasssen:
-
-    sudo chmod -R 775  /opt/iobroker/iobroker.mobile-alerts
-    
-    sudo chown -R iobroker.iobroker /opt/iobroker/iobroker.mobile-alerts
-
 - ioBroker starten: iobroker start
 
 Konfiguration:
@@ -28,7 +22,7 @@ Konfiguration:
   Die PhoneID kann in der Mobile-Alerts-App (für iOS bzw. Android) unter "Einstellungen" 
   gefunden werden.
   
-- Nach dem Speichern der PhoneID sollten innerhalb von ca. 3 Minuten (je nach Einstellung der Zeitplanung) die
+- Nach dem Speichern der PhoneID sollten innerhalb von ca. 7 Minuten (je nach Einstellung der Zeitplanung) die
   entsprechenden Objekte erzeugt und mit den aktuellen Daten werden 
   (siehe in der ioBroker-Gui unter Objekte >> "mobile-alerts.0").
   
