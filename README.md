@@ -4,15 +4,15 @@ Einfacher Adapter, um regelmäßig Werte vom Mobile Alerts Server herunterzulade
 
 Installation des Adapters:
 
-- Verzeichnis wechseln: cd /opt/iobroker
+- Verzeichnis wechseln: <code>cd /opt/iobroker</code>
 
-- ioBroker stoppen: iobroker stop
+- ioBroker stoppen: <code>iobroker stop</code>
 
 - Alle Dateien in das Verzeichnis /opt/iobroker/iobroker.mobile-alerts:
   
-    iobroker url "https://github.com/bluerai/ioBroker.mobile-alerts.git"
+    <code>iobroker url "https://github.com/bluerai/ioBroker.mobile-alerts.git"</code>
 
-- ioBroker starten: iobroker start
+- ioBroker starten: <code>iobroker start</code>
 
 Konfiguration:
 
@@ -39,6 +39,6 @@ Hinweise:
   willkommen.
   
   
-  Stand: 15.10.2019
+  Stand: 18.10.2019
 
 
