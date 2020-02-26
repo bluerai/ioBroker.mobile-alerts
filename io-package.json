@@ -29,6 +29,139 @@
 		"extractNumbers": true
 	},
 	"objects": [],
-	"instanceObjects": []
+	"instanceObjects": [{
+		"_id": "minmaxTemperatur",
+		"type": "channel",
+		"common": {
+			"name": "Temperaturen"
+		}
+	},
+	{
+		"_id": "minmaxTemperatur.maxTemp_heute",
+		"type": "state",
+		"common": {
+			"name": "max. Temperatur, heute",
+			"type": "number",
+			"role": "setting"
+		}
+	},
+	{
+		"_id": "minmaxTemperatur.minTemp_heute",
+		"type": "state",
+		"common": {
+			"name": "min. Temperatur, heute",
+			"type": "number",
+			"role": "setting"
+		}
+	},
+	{
+		"_id": "minmaxTemperatur.maxTemp_gestern",
+		"type": "state",
+		"common": {
+			"name": "max. Temperatur, gestern",
+			"type": "number",
+			"role": "setting"
+		}
+	},
+	{
+		"_id": "minmaxTemperatur.minTemp_gestern",
+		"type": "state",
+		"common": {
+			"name": "min. Temperatur, gestern",
+			"type": "number",
+			"role": "setting"
+		}
+	},
+	{
+		"_id": "minmaxTemperatur.maxTemp_vorgestern",
+		"type": "state",
+		"common": {
+			"name": "max. Temperatur, vorgestern",
+			"type": "number",
+			"role": "setting"
+		}
+	},
+	{
+		"_id": "minmaxTemperatur.minTemp_vorgestern",
+		"type": "state",
+		"common": {
+			"name": "min. Temperatur, vorgestern",
+			"type": "number",
+			"role": "setting"
+		}
+	},
+	{
+		"_id": "minmaxTemperatur.maxTemp_Woche",
+		"type": "state",
+		"common": {
+			"name": "max. Temperatur, aktuelle Woche",
+			"type": "number",
+			"role": "setting"
+		}
+	},
+	{
+		"_id": "minmaxTemperatur.minTemp_Woche",
+		"type": "state",
+		"common": {
+			"name": "min. Temperatur, aktuelle Woche",
+			"type": "number",
+			"role": "setting"
+		}
+	},
+	{
+		"_id": "minmaxTemperatur.maxTemp_Vorwoche",
+		"type": "state",
+		"common": {
+			"name": "max. Temperatur, Vorwoche",
+			"type": "number",
+			"role": "setting"
+		}
+	},
+	{
+		"_id": "minmaxTemperatur.minTemp_Vorwoche",
+		"type": "state",
+		"common": {
+			"name": "min. Temperatur, Vorwoche",
+			"type": "number",
+			"role": "setting"
+		}
+	},
+	{
+		"_id": "minmaxTemperatur.maxTemp_Monat",
+		"type": "state",
+		"common": {
+			"name": "max. Temperatur, aktueller Monat",
+			"type": "number",
+			"role": "setting"
+		}
+	},
+	{
+		"_id": "minmaxTemperatur.minTemp_Monat",
+		"type": "state",
+		"common": {
+			"name": "min. Temperatur, aktueller Monat",
+			"type": "number",
+			"role": "setting"
+		}
+	},
+	{
+		"_id": "minmaxTemperatur.maxTemp_Vormonat",
+		"type": "state",
+		"common": {
+			"name": "max. Temperatur, Vormonat",
+			"type": "number",
+			"role": "setting"
+		}
+	},
+	{
+		"_id": "minmaxTemperatur.minTemp_Vormonat",
+		"type": "state",
+		"common": {
+			"name": "min. Temperatur, Vormonat",
+			"type": "number",
+			"role": "setting"
+		}
+	}
+	]
 
 }
