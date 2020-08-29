@@ -254,15 +254,11 @@ function formatNum(s) {
 	if (extractNumbers == undefined) {
 		var extractNumbers = adapter.config.extractNumbers;
 		if (extractNumbers && patternNumber == undefined) {
-			var patternNumber = /^(-|\+)?\d+(,|\.)?\d* *(C|F|%)$/;
+			var patternNumber = /^(-|\+)?\d+(,|\.)?\d* *(C|F|%|mm)$/;
 		}
 	}
 
 	if (extractNumbers && patternNumber.test(s)) {
-		s = s.replace(" ", "");
-		s = s.replace("C", "");
-		s = s.replace("F", "");
-		s = s.replace("%", "");
 		s = s.replace(",", ".");
 		s = parseFloat(s);
 	}
