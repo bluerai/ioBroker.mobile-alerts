@@ -32,7 +32,7 @@
       "de" : "Einstellungen für den Mobile-Alerts-Adapter "
     },
     "On save adapter restarts with new config immediately" : {
-      "de" : "Beim Speichern der Einstellungen der Adapter wird neu gestartet."
+      "de" : "Beim Speichern der Einstellungen wird der Adapter neu gestartet."
     },
     "When selected the pure value is saved (useful if you want to do some further calculations)" : {
       "de" : "Falls ausgewählt, wird der reine Zahlenwert gespeichert (nützlich wenn weitere Berechnungen erfolgen sollen)."
@@ -110,15 +110,19 @@
 
     <tr>
       <td><label for="extractNumbers" class="translate">Zahlen extrahieren</label></td>
-      <td><input class="value" type="checkbox" id="extractNumbers" />
+      <td><input class="value" type="checkbox" id="extractNumbers" /><hr/>
       <span class="translate">When selected the pure number is saved (useful if you want to do some further calculations)</span><hr/>
       <span class="translate">Only for temperatures in degree C and degree F, percent values (%), lengths in mm and velocities in km/h</span>
   	  </td>
     </tr>
+    
+    <tr>
+      <td colspan=2><p class="translate">On save adapter restarts with new config immediately</p></td>
+    </tr>    
 
   </table>
   <br/><br/>
-  <p class="translate">On save adapter restarts with new config immediately</p>
+  
 </div>
 
 </html>
