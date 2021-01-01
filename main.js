@@ -81,6 +81,7 @@ function main() {
 	
 	request(ma_url, function (error, response, body) {
 	  	if (error || response.statusCode != 200) {
+	  		adapter.log.debug(error);
   			adapter.log.error('No valid response from Mobile Alerts server');
   		} else {
 			adapter.log.debug('Data received from Mobile Alerts server');
@@ -93,7 +94,7 @@ function main() {
 	setTimeout(function() {
 		adapter.log.error('Termination forced due to timeout!');
 		process.exit(1);
-	}, 3 * 60 * 1000);
+	}, 3 * 60000);
 
 	adapter.log.debug("out: " + methodName);
 }
