@@ -38,7 +38,9 @@ Hinweise:
   mit einer Wetterstation getestet. Hinweise und Ergänzungen zu weiteren Sensoren sind 
   willkommen.
   
-  
-  Stand: 18.10.2019
+===============================================================================
+Version 0.5.0: Umstellung der Request-Methode auf Post  
+
+Stand: 15.04.2021
 
 

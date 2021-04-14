@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "mobile-alerts",
-    "version": "0.0.1",
+    "version": "0.5.0",
     "title": "Mobile Alerts",
     "desc": {
       "en": "Mobile Alerts for ioBroker",

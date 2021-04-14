@@ -4,7 +4,14 @@
 
 var xml2js = require('xml2js');
 var utils = require(__dirname + '/lib/utils'); // Get common adapter utils
+
 var request = require('request');
+
+// Set the headers
+var headers = {
+    'User-Agent':       'User Agent/0.0.1',
+    'Content-Type':     'application/x-www-form-urlencoded'
+}
 
 // you have to call the adapter function and pass a options object
 // name has to be set and has to be equal to adapters folder name and main file
@@ -66,7 +73,7 @@ adapter.on('ready', function() {
 
 function main() {
 	var methodName = "main";
-	adapter.log.debug("in:  " + methodName + " v1.02");
+	adapter.log.debug("in:  " + methodName + " v0.5.0");
 
 	// All states changes inside the adapter's namespace are subscribed
 	adapter.subscribeStates('*');
@@ -75,13 +82,20 @@ function main() {
 	var ma_phoneId = adapter.config.phoneId;
 	var ma_path = adapter.config.path;
 	var ma_extractNumbers = adapter.config.extractNumbers;
-
-	var ma_url = 'https://' + ma_hostname + ma_path + '?phoneid=' + ma_phoneId;
-	adapter.log.debug(ma_url);
 	
-	request(ma_url, function (error, response, body) {
+	// Configure the request
+	var options = {
+    	url: 'https://' + ma_hostname + ma_path,
+	    method: 'POST',
+    	headers: headers,
+	    form: {'phoneid': ma_phoneId}
+	}
+
+	request(options, function (error, response, body) {
 	  	if (error || response.statusCode != 200) {
-	  		adapter.log.debug(error);
+	  		adapter.log.debug('error: ' + error);
+	  		adapter.log.debug('response.statusCode: ' + response.statusCode);
+  			adapter.log.debug('body: ' + body);
   			adapter.log.error('No valid response from Mobile Alerts server');
   		} else {
 			adapter.log.debug('Data received from Mobile Alerts server');
@@ -92,7 +106,7 @@ function main() {
 
 	// Force terminate
 	setTimeout(function() {
-		adapter.log.error('Termination forced due to timeout!');
+		adapter.log.error('Termination forced!');
 		process.exit(1);
 	}, 3 * 60000);
 
