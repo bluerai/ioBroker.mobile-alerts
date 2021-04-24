@@ -48,11 +48,11 @@ Hinweise:
   Installation aus GitHub geladen werden.
   
   
-Stand 18.04.2021
+Stand 24.04.2021
 
 ===============================================================================
 
-Version 0.5.1 (18.04.2021):
+Version 0.5.1 (24.04.2021):
 Script zum Füllen des "minmaxTemperatur"-Objekts hinzugefügt.
 
 Version 0.5.0 (15.04.2021): 
