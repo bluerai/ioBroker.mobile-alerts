@@ -73,7 +73,7 @@ adapter.on('ready', function() {
 
 function main() {
 	var methodName = "main";
-	adapter.log.debug("in:  " + methodName + " v0.5.0");
+	adapter.log.debug("in:  " + methodName + " v0.5.1");
 
 	// All states changes inside the adapter's namespace are subscribed
 	adapter.subscribeStates('*');
