@@ -108,7 +108,7 @@ function main() {
 	setTimeout(function() {
 		adapter.log.error('Termination forced!');
 		process.exit(1);
-	}, 3 * 60000);
+	}, 4 * 60000);
 
 	adapter.log.debug("out: " + methodName);
 }
@@ -275,7 +275,7 @@ function formatNum(s) {
 
 	if (extractNumbers && patternNumber.test(s)) {
 		s = s.replace(",", ".");
-		s = parseFloat(s);
+		s = parseFloat(s).toString();
 	}
 	return s;
 }
