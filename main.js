@@ -93,21 +93,33 @@ function main() {
 
 	request(options, function (error, response, body) {
 	  	if (error || response.statusCode != 200) {
-	  		adapter.log.debug('error: ' + error);
-	  		adapter.log.debug('response.statusCode: ' + response.statusCode);
+	  		adapter.log.error('error: ' + error);
+	  		adapter.log.error('response.statusCode: ' + response.statusCode);
   			adapter.log.debug('body: ' + body);
   			adapter.log.error('No valid response from Mobile Alerts server');
+			setTimeout(function() {
+				process.exit(-2);
+			}, 5000);
   		} else {
 			adapter.log.debug('Data received from Mobile Alerts server');
 			var data = body.toString().match(/(<h[45]>.*<\/h[45]>|<\/?body>|<a .*deviceid=.*<\/a>)/gim);
-			parseData(data.toString());
+			
+			if (!data || !data.toString()) {
+				setTimeout(function() {
+  					adapter.log.error('Data: ' + data);
+					adapter.log.debug('body: ' + body);
+					process.exit(-3);
+				}, 5000);
+			} else {
+				parseData(data.toString());
+			}
 		}
 	});
 
 	// Force terminate
 	setTimeout(function() {
-		adapter.log.error('Termination forced!');
-		process.exit(1);
+		adapter.log.error('Timeout. Termination forced!');
+		process.exit(-1);
 	}, 4 * 60000);
 
 	adapter.log.debug("out: " + methodName);
@@ -117,13 +129,6 @@ function parseData(xml) {
 	var methodName = "parseData";
 	adapter.log.debug("in:  " + methodName);
 	adapter.log.debug("parameter: xml: " + xml);
-
-	if (!xml) {
-		setTimeout(function() {
-			process.exit(0);
-		}, 5000);
-		return;
-	}
 
 	var options = {
 	  explicitArray : false,
