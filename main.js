@@ -93,10 +93,10 @@ function main() {
 
 	request(options, function (error, response, body) {
 	  	if (error || response.statusCode != 200) {
-	  		adapter.log.error('error: ' + error);
+	  		if (error !== null) { adapter.log.error('error: ' + error); }
 	  		adapter.log.error('response.statusCode: ' + response.statusCode);
   			adapter.log.debug('body: ' + body);
-  			adapter.log.error('No valid response from Mobile Alerts server');
+  			adapter.log.error('Exit: No valid response from Mobile Alerts server');
 			setTimeout(function() {
 				process.exit(-2);
 			}, 5000);
@@ -106,8 +106,8 @@ function main() {
 			
 			if (!data || !data.toString()) {
 				setTimeout(function() {
-  					adapter.log.error('Data: ' + data);
-					adapter.log.debug('body: ' + body);
+  					adapter.log.error('Exit: Data not matched');
+  					adapter.log.debug('body: ' + body);
 					process.exit(-3);
 				}, 5000);
 			} else {
@@ -118,7 +118,7 @@ function main() {
 
 	// Force terminate
 	setTimeout(function() {
-		adapter.log.error('Timeout. Termination forced!');
+		adapter.log.error('Exit: Timeout. Termination forced!');
 		process.exit(-1);
 	}, 4 * 60000);
 
