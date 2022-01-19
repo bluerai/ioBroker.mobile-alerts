@@ -99,7 +99,7 @@ function main() {
   			adapter.log.error('Exit: No valid response from Mobile Alerts server');
 			setTimeout(function() {
 				process.exit(-2);
-			}, 5000);
+			}, 2000);
   		} else {
 			adapter.log.debug('Data received from Mobile Alerts server');
 			var data = body.toString().match(/(<h[45]>.*<\/h[45]>|<\/?body>|<a .*deviceid=.*<\/a>)/gim);
@@ -109,7 +109,7 @@ function main() {
   					adapter.log.error('Exit: Data not matched');
   					adapter.log.debug('body: ' + body);
 					process.exit(-3);
-				}, 5000);
+				}, 2000);
 			} else {
 				parseData(data.toString());
 			}
