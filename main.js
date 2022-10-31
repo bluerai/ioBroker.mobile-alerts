@@ -274,7 +274,7 @@ function formatNum(s) {
 	if (extractNumbers == undefined) {
 		var extractNumbers = adapter.config.extractNumbers;
 		if (extractNumbers && patternNumber == undefined) {
-			var patternNumber = /^(-|\+)?\d+(,|\.)?\d* *(C|F|%|mm|km\/h)$/;
+			var patternNumber = /^(-|\+)?\d+(,|\.)?\d* *(C|F|%|mm|km\/h|hPa|m/s)$/;
 		}
 	}
 
