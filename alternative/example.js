@@ -1,5 +1,21 @@
-const mobileAlertsPath = "javascript.0.mobileAlerts.";
+// Übernahme von MobileAlerts-Sensordaten nach ioBroker 
+// über die MobilerAlerts-API
+
+// Das Script erzeugt die benötigten ioBroker-Datenpunkte und füllt sie mit den Werten,
+// die der MobileAlerts-Server über die API zur Verfügung stellt.
+
+// Die Sensordaten werden direkt ausgewertet, eine PhoneId wird nicht benötigt.
+
+
+const mobileAlertsPath = "javascript.0.mobileAlertsTest.";  //Datenpunkte werden in diesem Pfad erzeugt.
 const apiURL = "https://www.data199.com/api/pv1/device/lastmeasurement";
+
+//Die folgenden Konstanten enthalten, welche Datenpunkte für einen bestimmten Sensortyp angelegt werden.
+//Anzugeben sind für den Datenpunkt name, type und unit.
+
+//measurementXX: Die Nummern XX beziehen sich auf die API-Doku.
+
+//TODO: Es gibt in der API-Doku weitere Measurements, die hier noch nicht definiert sind
 
 const measurement02 =  new Map([["lb", {name: "lowbattery", type: "boolean", unit: ""}], 
     ["t1", {name: "Temperatur", type: "number", unit: "°C"}], 
@@ -21,25 +37,24 @@ const measurement07 = new Map([["lb", {name: "lowbattery", type: "boolean", unit
     ["ts", {name: "Timestamp", type: "number", unit: "sec"}],
     ["lb", {name: "Low Battery", type: "boolean", unit: ""}]]);
 
+// Hier wird für jede Geräte-Id der Name und das zu benutzende Measurement festgelegt.
+// Die IDs hier sind Test-IDs von MobileAlerts
 let propertyArray = [
-{ id: "xxxxxxxxxxxx",	name: "Wetterstation", data: measurement07, 
-    targets: new Map([
-        ["t1", 'hm-rega.0.xxxxx'/*MA Wetterstation, Innentemperatur*/],
-        ["t2", 'hm-rega.0.xxxxx'/*MA Wetterstation, Außentemperatur*/],
-        ["h", 'hm-rega.0.xxxxx'/*MA Wetterstation, Innenfeuchte*/],
-        ["h2", 'hm-rega.0.xxxxx'/*MA Wetterstation, Außenfeuchte*/]]) },
 
-{ id: "xxxxxxxxxxxx",	name: "Keller", data: measurement04,
-    targets: new Map([
-        ["t1", 'hm-rega.0.xxxxx'/*MA Keller, Temperatur*/ ],
-        ["h", 'hm-rega.0.xxxxx'/*MA Keller, Feuchte*/ ],
-        ["t2", 'hm-rega.0.xxxxx'/*MA Keller-Wassersensor*/]]) },
+{ id: "0706D3E17D33",	name: "Wetterstation Wohnzimmer", data: measurement07},
 
-{ id: "xxxxxxxxxxxx",	name: "Zusatzthermometer 1" , data: measurement02,
-    targets: new Map([ ["t1", 'hm-rega.0.15921'/*MA Zusatzthermometer 1*/]]) },
+{ id: "04419803C1B0",	name: "Badezimmer", data: measurement04},
 
-{ id: "xxxxxxxxxxxx",	name: "Zusatzthermometer 2" , data: measurement02,
-    targets: new Map([ ["t1", 'hm-rega.0.50091'/*MA Zusatzthermometer 2*/]]) } ];
+{ id: "1200099803A1",	name: "Sample Sensor Humidity Guard", data: measurement02},
+
+{ id: "0301548CBC4A",	name: "Sample Sensor Berlin" , data: measurement02},
+
+{ id: "090005AC99E2",	name: "Sample Sensor Hannover" , data: measurement02} ];
+
+
+//================================ Ab hier nur ändern, wenn man weiß was man tut! ================================
+
+
 
 let deviceidString = "";
 var propertiesById = new Map();
@@ -61,7 +76,7 @@ function createDataPoint(id, value, name, dptype, unit, role) {
 
 propertyArray.forEach (function(item, key) {
 
-    createDataPoint( mobileAlertsPath + "Devices" + "." + item.id, "", item.name, "object", "", "device");
+    createDataPoint( mobileAlertsPath + "Devices" + "." + item.id, undefined, item.name, "object", "", "device");
 
     item.data.forEach (function(subitem, key) {
 
@@ -106,23 +121,11 @@ exec(curlCmd, function (error, stdout, stderr) {
         obj.devices.forEach (function(item) {
 
             let props = propertiesById.get(item.deviceid);
-            let targets = props.targets;
 
             for (var [key, subitem] of props.data) {
 
                 setState(mobileAlertsPath + "Devices" + "." + item.deviceid + "." + key, item["measurement"][key]);
 
-                if (targets.get(key) !== undefined) {
-                    
-                    let val;
-                    val = parseFloat(item["measurement"][key]);
-                    let target = targets.get(key) ;
-                    if (target == 'hm-rega.0.xxxx') {
-                        val = (val == 0);
-                    }
-                    
-                    setState(targets.get(key), val);
-                } 
             };
         });
 
@@ -137,3 +140,7 @@ exec(curlCmd, function (error, stdout, stderr) {
 getData();
 
 schedule('*/7 * * * *', function() {setTimeout(getData, 4.5 * 60000)});
+
+
+
+
