@@ -61,5 +61,21 @@ Umstellung der Request-Methode auf Post
 ===============================================================================
 
 
+===============================================================================
+
+Note vom 14.06.2023
+
+Ich werde diesen Adapter nicht weiter pflegen.
+
+Grund: Ich benutze inzwischen die offizielle Mobile Alerts API über ein ioBroker-Script.
+Das geht relativ einfach, ist schnell und im Allgemeinen recht zuverlässig. 
+
+Im Verzeichnis "alternative" habe ich ein Javascript-Beispiel für den Zugriff auf die API abgelegt. 
+Erläuterungen dazu bitte der Mobile Alerts API-Doku (von der MA-Website) entnehmen.
+
+Beste Grüße Rai
+
+===============================================================================
+
 
 
