@@ -6,6 +6,8 @@
 
 // Die Sensordaten werden direkt ausgewertet, eine PhoneId wird nicht benötigt.
 
+// Hinweis: 
+// In "Hosts --> Host-Basiseinstellungen --> System" muss "Shell-Befehle zulassen" aktiviert sein!
 
 const mobileAlertsPath = "javascript.0.mobileAlertsTest.";  //Datenpunkte werden in diesem Pfad erzeugt.
 const apiURL = "https://www.data199.com/api/pv1/device/lastmeasurement";
