@@ -1,5 +1,5 @@
 // Übernahme von MobileAlerts-Sensordaten nach ioBroker 
-// über die MobilerAlerts-API
+// über die MobileAlerts-API
 
 // Das Script erzeugt die benötigten ioBroker-Datenpunkte und füllt sie mit den Werten,
 // die der MobileAlerts-Server über die API zur Verfügung stellt.
@@ -19,19 +19,19 @@ const apiURL = "https://www.data199.com/api/pv1/device/lastmeasurement";
 
 //TODO: Es gibt in der API-Doku weitere Measurements, die hier noch nicht definiert sind
 
-const measurement02 =  new Map([["lb", {name: "lowbattery", type: "boolean", unit: ""}], 
+const measurement02 =  new Map([
     ["t1", {name: "Temperatur", type: "number", unit: "°C"}], 
     ["ts", {name: "Timestamp", type: "number", unit: "sec"}],
     ["lb", {name: "Low Battery", type: "boolean", unit: ""}]]);
 
-const measurement04 = new Map([["lb", {name: "lowbattery", type: "boolean", unit: ""}], 
+const measurement04 = new Map([ 
     ["t1", {name: "Temperatur", type: "number", unit: "°C"}], 
     ["t2", {name: "Wassersensor", type: "number", unit: ""}], 
     ["h",  {name: "Feuchtigkeit", type: "number", unit: "%"}], 
     ["ts", {name: "Timestamp", type: "number", unit: "sec"}],
     ["lb", {name: "Low Battery", type: "boolean", unit: ""}]]);
 
-const measurement07 = new Map([["lb", {name: "lowbattery", type: "boolean", unit: ""}], 
+const measurement07 = new Map([ 
     ["t1", {name: "Temperatur, innen", type: "number", unit: "°C"}], 
     ["t2", {name: "Temperatur, außen", type: "number", unit: "°C"}], 
     ["h",  {name: "Luftfeuchte, innen", type: "number", unit: "%"}], 
@@ -39,7 +39,7 @@ const measurement07 = new Map([["lb", {name: "lowbattery", type: "boolean", unit
     ["ts", {name: "Timestamp", type: "number", unit: "sec"}],
     ["lb", {name: "Low Battery", type: "boolean", unit: ""}]]);
 
-// Hier wird für jede Geräte-Id der Name und das zu benutzende Measurement festgelegt.
+// Hier werden für jede Geräte-Id der Name und das zu benutzende Measurement festgelegt.
 // Die IDs hier sind Test-IDs von MobileAlerts
 let propertyArray = [
 
@@ -56,8 +56,6 @@ let propertyArray = [
 
 //================================ Ab hier nur ändern, wenn man weiß was man tut! ================================
 
-
-
 let deviceidString = "";
 var propertiesById = new Map();
 propertyArray.forEach (function(item, key, arr) {
@@ -69,7 +67,6 @@ deviceidString = deviceidString.substring(0, deviceidString.length - 1);  // Kom
 
 let curlCmd = 'curl -d "deviceids=' + deviceidString + '" --http1.1 ' + apiURL;
 
-
 function createDataPoint(id, value, name, dptype, unit, role) {
     if (!existsObject(id)) {
         createState(id, value, { "name": name, "type": dptype, "unit": unit, "read": true, "write": true, "role": role });
@@ -77,9 +74,7 @@ function createDataPoint(id, value, name, dptype, unit, role) {
 }
 
 propertyArray.forEach (function(item, key) {
-
-    createDataPoint( mobileAlertsPath + "Devices" + "." + item.id, undefined, item.name, "object", "", "device");
-
+    
     item.data.forEach (function(subitem, key) {
 
         createDataPoint(mobileAlertsPath + "Devices" + "." + item.id + "." + key, undefined, subitem.name, subitem.type, subitem.unit, "data");
