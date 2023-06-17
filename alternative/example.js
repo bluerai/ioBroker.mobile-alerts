@@ -24,6 +24,12 @@ const measurement02 =  new Map([
     ["ts", {name: "Timestamp", type: "number", unit: "sec"}],
     ["lb", {name: "Low Battery", type: "boolean", unit: ""}]]);
 
+const measurement03 = new Map([[
+	["t1", {name: "Temperatur", type: "number", unit: "°C"}],
+	["h", {name: "Luftfeuchte, innen", type: "number", unit: "%"}],
+	["ts", {name: "Timestamp", type: "number", unit: "sec"}],
+	["lb", {name: "Low Battery", type: "boolean", unit: ""}]]);
+
 const measurement04 = new Map([ 
     ["t1", {name: "Temperatur", type: "number", unit: "°C"}], 
     ["t2", {name: "Wassersensor", type: "number", unit: ""}], 
