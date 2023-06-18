@@ -24,12 +24,6 @@ const measurement02 =  new Map([
     ["ts", {name: "Timestamp", type: "number", unit: "sec"}],
     ["lb", {name: "Low Battery", type: "boolean", unit: ""}]]);
 
-const measurement03 = new Map([[
-	["t1", {name: "Temperatur", type: "number", unit: "°C"}],
-	["h", {name: "Luftfeuchte, innen", type: "number", unit: "%"}],
-	["ts", {name: "Timestamp", type: "number", unit: "sec"}],
-	["lb", {name: "Low Battery", type: "boolean", unit: ""}]]);
-
 const measurement04 = new Map([ 
     ["t1", {name: "Temperatur", type: "number", unit: "°C"}], 
     ["t2", {name: "Wassersensor", type: "number", unit: ""}], 
@@ -73,19 +67,14 @@ deviceidString = deviceidString.substring(0, deviceidString.length - 1);  // Kom
 
 let curlCmd = 'curl -d "deviceids=' + deviceidString + '" --http1.1 ' + apiURL;
 
-function createDataPoint(id, value, name, dptype, unit, role) {
-    if (!existsObject(id)) {
-        createState(id, value, { "name": name, "type": dptype, "unit": unit, "read": true, "write": true, "role": role });
-    }
-}
 
 propertyArray.forEach (function(item, key) {
-    
-    item.data.forEach (function(subitem, key) {
-
-        createDataPoint(mobileAlertsPath + "Devices" + "." + item.id + "." + key, undefined, subitem.name, subitem.type, subitem.unit, "data");
-
-    });
+    if (!existsObject(mobileAlertsPath + "Devices" + "." + item.id)) {
+        item.data.forEach (function(subitem, key) {
+            createState(mobileAlertsPath + "Devices" + "." + item.id + "." + key, undefined, { "name": name, "type": subitem.type, "unit": subitem.unit, "read": true, "write": true, "role": "data" });
+        });
+        extendObject(mobileAlertsPath + "Devices" + "." + item.id, {common: {name: item.name}});
+    }
 });
 
 
