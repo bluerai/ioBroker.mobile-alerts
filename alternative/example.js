@@ -76,13 +76,12 @@ let curlCmd = 'curl -d "deviceids=' + deviceidString + '" --http1.1 ' + apiURL;
 
 propertyArray.forEach (function(item, key) {
     if (!existsObject(mobileAlertsPath + "Devices" + "." + item.id)) {
+        createState(mobileAlertsPath + "Devices" + "." + item.id, undefined, { "name": item.name, "type": "object", "read": true, "write": true});
         item.data.forEach (function(subitem, key) {
             createState(mobileAlertsPath + "Devices" + "." + item.id + "." + key, undefined, { "name": name, "type": subitem.type, "unit": subitem.unit, "read": true, "write": true, "role": "data" });
         });
-        extendObject(mobileAlertsPath + "Devices" + "." + item.id, {common: {name: item.name}});
     }
 });
-
 
 let receivingData = false;
 let execCounter = 0;
