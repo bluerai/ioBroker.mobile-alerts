@@ -7,12 +7,9 @@
 // Die Sensordaten werden direkt über die SensorId ausgewertet, eine PhoneId wird nicht benötigt.
 
 // Hinweise:
-
-// Das Abrufen der Daten erfolgt standardmäßig mit "curl" (siehe https://curl.se ).
-// Falls ein anderes Programm benutzt wird, muss die Variable urlClientCmd angepasst werden
-
-// In "Hosts --> Host-Basiseinstellungen --> System" muss "Shell-Befehle zulassen" aktiviert sein!
-
+// -  Das Abrufen der Daten erfolgt standardmäßig mit "/usr/bin/curl" (siehe https://curl.se ).
+//    Falls ein anderes Programm benutzt wird, muss die Variable urlClientCmd angepasst werden.
+// -  In "Hosts --> Host-Basiseinstellungen --> System" muss "Shell-Befehle zulassen" aktiviert sein!
 
 const mobileAlertsPath = "javascript.0.mobileAlertsTest.";  //Datenpunkte werden in diesem Pfad erzeugt.
 const apiURL = "https://www.data199.com/api/pv1/device/lastmeasurement";
@@ -76,8 +73,11 @@ propertyArray.forEach (function(item, key, arr) {
 
 deviceidString = deviceidString.substring(0, deviceidString.length - 1);  // Komma entfernen
 
-let urlClientCmd = 'curl -d "deviceids=' + deviceidString + '" --http1.1 ' + apiURL;
+let urlClientCmd = '/usr/bin/curl -d "deviceids=' + deviceidString + '" --http1.1 ' + apiURL;
+// Falls "wget" eingesetzt werden soll:
+// let urlClientCmd = '/usr/bin/wget -O "-" --post-data "deviceids=' + deviceidString + '" ' + apiURL;
 
+log("urlClientCommand: " + urlClientCmd, "debug");
 
 propertyArray.forEach (function(item, key) {
     if (!existsObject(mobileAlertsPath + "Devices" + "." + item.id)) {
@@ -104,7 +104,7 @@ exec(urlClientCmd, function (error, stdout, stderr) {
     execCounter = ++execCounter % 1000;
     execDuration = Math.round((new Date().getTime() - execDuration) / 100) / 10;  //Startwert setzen
     maxExecDuration = Math.max(maxExecDuration, execDuration);
-    
+
     if (error !== null) {
         log('Mobile Alerts: (1) Receiving Data ended with errorcode ' +  error.code + '(#' + execCounter + ", " + execDuration + " sec).", "error");
         receivingData = false;
@@ -142,7 +142,4 @@ exec(urlClientCmd, function (error, stdout, stderr) {
 getData();
 
 schedule('*/7 * * * *', function() {setTimeout(getData, 4.5 * 60000)});
-
-
-
 
