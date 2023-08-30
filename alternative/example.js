@@ -4,10 +4,15 @@
 // Das Script erzeugt die benötigten ioBroker-Datenpunkte und füllt sie mit den Werten,
 // die der MobileAlerts-Server über die API zur Verfügung stellt.
 
-// Die Sensordaten werden direkt ausgewertet, eine PhoneId wird nicht benötigt.
+// Die Sensordaten werden direkt über die SensorId ausgewertet, eine PhoneId wird nicht benötigt.
 
-// Hinweis: 
+// Hinweise:
+
+// Das Abrufen der Daten erfolgt standardmäßig mit "curl" (siehe https://curl.se ).
+// Falls ein anderes Programm benutzt wird, muss die Variable urlClientCmd angepasst werden
+
 // In "Hosts --> Host-Basiseinstellungen --> System" muss "Shell-Befehle zulassen" aktiviert sein!
+
 
 const mobileAlertsPath = "javascript.0.mobileAlertsTest.";  //Datenpunkte werden in diesem Pfad erzeugt.
 const apiURL = "https://www.data199.com/api/pv1/device/lastmeasurement";
@@ -46,7 +51,7 @@ const measurement07 = new Map([
     ["lb", {name: "Low Battery", type: "boolean", unit: ""}]]);
 
 // Hier werden für jede Geräte-Id der Name und das zu benutzende Measurement festgelegt.
-// Die IDs hier sind Test-IDs von MobileAlerts
+// Die IDs hier sind Test-SensorIDs von MobileAlerts
 let propertyArray = [
 
 { id: "0706D3E17D33",	name: "Wetterstation Wohnzimmer", data: measurement07},
@@ -71,14 +76,14 @@ propertyArray.forEach (function(item, key, arr) {
 
 deviceidString = deviceidString.substring(0, deviceidString.length - 1);  // Komma entfernen
 
-let curlCmd = 'curl -d "deviceids=' + deviceidString + '" --http1.1 ' + apiURL;
+let urlClientCmd = 'curl -d "deviceids=' + deviceidString + '" --http1.1 ' + apiURL;
 
 
 propertyArray.forEach (function(item, key) {
     if (!existsObject(mobileAlertsPath + "Devices" + "." + item.id)) {
         createState(mobileAlertsPath + "Devices" + "." + item.id, undefined, { "name": item.name, "type": "object", "read": true, "write": true});
         item.data.forEach (function(subitem, key) {
-            createState(mobileAlertsPath + "Devices" + "." + item.id + "." + key, undefined, { "name": name, "type": subitem.type, "unit": subitem.unit, "read": true, "write": true, "role": "data" });
+            createState(mobileAlertsPath + "Devices" + "." + item.id + "." + key, undefined, { "name": subitem.name, "type": subitem.type, "unit": subitem.unit, "read": true, "write": true, "role": "data" });
         });
     }
 });
@@ -95,7 +100,7 @@ receivingData = true;
 
 execDuration = new Date().getTime();
 
-exec(curlCmd, function (error, stdout, stderr) {
+exec(urlClientCmd, function (error, stdout, stderr) {
     execCounter = ++execCounter % 1000;
     execDuration = Math.round((new Date().getTime() - execDuration) / 100) / 10;  //Startwert setzen
     maxExecDuration = Math.max(maxExecDuration, execDuration);
