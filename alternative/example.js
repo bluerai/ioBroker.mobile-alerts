@@ -21,6 +21,7 @@ const apiURL = "https://www.data199.com/api/pv1/device/lastmeasurement";
 
 //TODO: Es gibt in der API-Doku weitere Measurements, die hier noch nicht definiert sind
 
+
 const measurement02 =  new Map([
     ["t1", {name: "Temperatur", type: "number", unit: "°C"}], 
     ["ts", {name: "Timestamp", type: "number", unit: "sec"}],
@@ -47,19 +48,29 @@ const measurement07 = new Map([
     ["ts", {name: "Timestamp", type: "number", unit: "sec"}],
     ["lb", {name: "Low Battery", type: "boolean", unit: ""}]]);
 
+const measurement10 =  new Map([
+    ["w", {name: "Kontakt", type: "boolean", unit: ""}], 
+    ["ts", {name: "Timestamp", type: "number", unit: "sec"}],
+    ["lb", {name: "Low Battery", type: "boolean", unit: ""}]]);
+    
+
 // Hier werden für jede Geräte-Id der Name und das zu benutzende Measurement festgelegt.
 // Die IDs hier sind Test-SensorIDs von MobileAlerts
 let propertyArray = [
+    { id: "1200099803A1",	name: "Sample Sensor Humidity Guard", data: measurement02},
 
-{ id: "0706D3E17D33",	name: "Wetterstation Wohnzimmer", data: measurement07},
+    { id: "090005AC99E2",	name: "Sample Sensor Hannover" , data: measurement02},
 
-{ id: "04419803C1B0",	name: "Badezimmer", data: measurement04},
+    { id: "0301548CBC4A",	name: "Sample Sensor Berlin" , data: measurement02},
 
-{ id: "1200099803A1",	name: "Sample Sensor Humidity Guard", data: measurement02},
+    { id: "034A9045C882",	name: "Sample Sensor Hannover" , data: measurement03},
 
-{ id: "0301548CBC4A",	name: "Sample Sensor Berlin" , data: measurement02},
+    { id: "04419803C1B0",	name: "Sample Water Detection Sensor", data: measurement04},
 
-{ id: "090005AC99E2",	name: "Sample Sensor Hannover" , data: measurement02} ];
+    { id: "0706D3E17D33",	name: "Sample Wetterstation", data: measurement07},
+
+    { id: "10246A3EB617",	name: "Sample Contact Sensor" , data: measurement10}
+];
 
 
 //================================ Ab hier nur ändern, wenn man weiß was man tut! ================================
