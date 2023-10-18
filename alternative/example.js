@@ -137,7 +137,7 @@ exec(urlClientCmd, function (error, stdout, stderr) {
 
             for (var [key, subitem] of props.data) {
 
-                setState(mobileAlertsPath + "Devices" + "." + item.deviceid + "." + key, {item["measurement"][key], ack: true});
+                setState(mobileAlertsPath + "Devices" + "." + item.deviceid + "." + key, {val: item["measurement"][key], ack: true});
 
             };
         });
