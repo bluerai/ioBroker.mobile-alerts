@@ -21,26 +21,31 @@ const apiURL = "https://www.data199.com/api/pv1/device/lastmeasurement";
 
 //TODO: Es gibt in der API-Doku weitere Measurements, die hier noch nicht definiert sind
 
-
-const measurement02 =  new Map([
+const measurement02 =  new Map([  //Thermometer
     ["t1", {name: "Temperatur", type: "number", unit: "°C"}], 
     ["ts", {name: "Timestamp", type: "number", unit: "sec"}],
     ["lb", {name: "Low Battery", type: "boolean", unit: ""}]]);
 
-const measurement03 = new Map([
+const measurement03 = new Map([   //Thermo- nd Hygrometer
 	["t1", {name: "Temperatur", type: "number", unit: "°C"}],
 	["h",  {name: "Luftfeuchte", type: "number", unit: "%"}],
 	["ts", {name: "Timestamp", type: "number", unit: "sec"}],
 	["lb", {name: "Low Battery", type: "boolean", unit: ""}]]);
 
-const measurement04 = new Map([ 
+const measurement04 = new Map([    //Thermometer mit Wassersensor
     ["t1", {name: "Temperatur", type: "number", unit: "°C"}], 
     ["t2", {name: "Wassersensor", type: "number", unit: ""}], 
     ["h",  {name: "Luftfeuchte", type: "number", unit: "%"}], 
     ["ts", {name: "Timestamp", type: "number", unit: "sec"}],
     ["lb", {name: "Low Battery", type: "boolean", unit: ""}]]);
 
-const measurement07 = new Map([ 
+const measurement08 = new Map([ //Regensensor
+    ["t1", {name: "Temperatur", type: "number", unit: "°C"}],
+    ["r",  {name: "Regenmenge", type: "number", unit: "mm"}],
+    ["ts", {name: "Timestamp", type: "number", unit: "sec"}],
+    ["lb", {name: "Low Battery", type: "boolean", unit: ""}]]);
+
+const measurement07 = new Map([     //Wetterstation
     ["t1", {name: "Temperatur, innen", type: "number", unit: "°C"}], 
     ["t2", {name: "Temperatur, außen", type: "number", unit: "°C"}], 
     ["h",  {name: "Luftfeuchte, innen", type: "number", unit: "%"}], 
@@ -48,11 +53,18 @@ const measurement07 = new Map([
     ["ts", {name: "Timestamp", type: "number", unit: "sec"}],
     ["lb", {name: "Low Battery", type: "boolean", unit: ""}]]);
 
-const measurement10 =  new Map([
+const measurement10 =  new Map([    //Kontaktsensor
     ["w", {name: "Kontakt", type: "boolean", unit: ""}], 
     ["ts", {name: "Timestamp", type: "number", unit: "sec"}],
     ["lb", {name: "Low Battery", type: "boolean", unit: ""}]]);
-    
+
+const measurement0B = new Map([  //Windsensor
+    ["ws", {name: "Windgeschwindigkeit", type: "string", unit: "m/s"}],
+    ["wg", {name: "Böe", type: "string", unit: "m/s"}],
+    ["wd", {name: "Windrichtung", type: "number", unit: ""}],
+    ["ts", {name: "Timestamp", type: "number", unit: "sec"}],
+    ["lb", {name: "Low Battery", type: "boolean", unit: ""}]]);
+
 
 // Hier werden für jede Geräte-Id der Name und das zu benutzende Measurement festgelegt.
 // Die IDs hier sind Test-SensorIDs von MobileAlerts
@@ -69,7 +81,11 @@ let propertyArray = [
 
     { id: "0706D3E17D33",	name: "Sample Wetterstation", data: measurement07},
 
-    { id: "10246A3EB617",	name: "Sample Contact Sensor" , data: measurement10}
+    { id: "0816B9D3591E",	name: "Sample Rain Sensor", data: measurement08},
+
+    { id: "10246A3EB617",	name: "Sample Contact Sensor" , data: measurement10},
+
+    { id: "0B0075E315BB",	name: "Sample Wind Sensor" , data: measurement0B}
 ];
 
 
@@ -79,10 +95,8 @@ let deviceidString = "";
 var propertiesById = new Map();
 propertyArray.forEach (function(item, key, arr) {
     propertiesById.set(item.id, item);
-    deviceidString += item.id + ",";
+    deviceidString += ((deviceidString !== "") ? "," : "") + item.id;
 })
-
-deviceidString = deviceidString.substring(0, deviceidString.length - 1);  // Komma entfernen
 
 let urlClientCmd = '/usr/bin/curl -d "deviceids=' + deviceidString + '" --http1.1 ' + apiURL;
 // Falls "wget" eingesetzt werden soll:
@@ -143,6 +157,7 @@ exec(urlClientCmd, function (error, stdout, stderr) {
         });
 
     } else {
+        log(stdout, "info");
         log('Mobile Alerts: (2) Received object contains error "' +  obj.errorcode + '": ' + obj.errormessage + '(#' + execCounter + ", " + execDuration + ' sec).', 'error');
     }
 
@@ -153,4 +168,7 @@ exec(urlClientCmd, function (error, stdout, stderr) {
 getData();
 
 schedule('*/7 * * * *', function() {setTimeout(getData, 4.5 * 60000)});
+
+
+
 
