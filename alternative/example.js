@@ -11,7 +11,7 @@
 //    Falls ein anderes Programm benutzt wird, muss die Variable urlClientCmd angepasst werden.
 // -  In "Hosts --> Host-Basiseinstellungen --> System" muss "Shell-Befehle zulassen" aktiviert sein!
 
-const mobileAlertsPath = "javascript.0.mobileAlertsTest.";  //Datenpunkte werden in diesem Pfad erzeugt.
+const mobileAlertsPath = "0_userdata.0.mobileAlertsTest.";  //Datenpunkte werden in diesem Pfad erzeugt.
 const apiURL = "https://www.data199.com/api/pv1/device/lastmeasurement";
 
 //Die folgenden Konstanten enthalten, welche Datenpunkte für einen bestimmten Sensortyp angelegt werden.
@@ -22,48 +22,35 @@ const apiURL = "https://www.data199.com/api/pv1/device/lastmeasurement";
 //TODO: Es gibt in der API-Doku weitere Measurements, die hier noch nicht definiert sind
 
 const measurement02 =  new Map([  //Thermometer
-    ["t1", {name: "Temperatur", type: "number", unit: "°C"}], 
-    ["ts", {name: "Timestamp", type: "number", unit: "sec"}],
-    ["lb", {name: "Low Battery", type: "boolean", unit: ""}]]);
+    ["t1", {name: "Temperatur", type: "number", unit: "°C"}]]);
 
-const measurement03 = new Map([   //Thermo- nd Hygrometer
+const measurement03 = new Map([   //Thermo- und Hygrometer
 	["t1", {name: "Temperatur", type: "number", unit: "°C"}],
-	["h",  {name: "Luftfeuchte", type: "number", unit: "%"}],
-	["ts", {name: "Timestamp", type: "number", unit: "sec"}],
-	["lb", {name: "Low Battery", type: "boolean", unit: ""}]]);
+	["h",  {name: "Luftfeuchte", type: "number", unit: "%"}]]);
 
 const measurement04 = new Map([    //Thermometer mit Wassersensor
     ["t1", {name: "Temperatur", type: "number", unit: "°C"}], 
     ["t2", {name: "Wassersensor", type: "number", unit: ""}], 
     ["h",  {name: "Luftfeuchte", type: "number", unit: "%"}], 
-    ["ts", {name: "Timestamp", type: "number", unit: "sec"}],
-    ["lb", {name: "Low Battery", type: "boolean", unit: ""}]]);
+    ["ts", {name: "Timestamp", type: "number", unit: "sec"}]]);
 
 const measurement08 = new Map([ //Regensensor
     ["t1", {name: "Temperatur", type: "number", unit: "°C"}],
-    ["r",  {name: "Regenmenge", type: "number", unit: "mm"}],
-    ["ts", {name: "Timestamp", type: "number", unit: "sec"}],
-    ["lb", {name: "Low Battery", type: "boolean", unit: ""}]]);
+    ["r",  {name: "Regenmenge", type: "number", unit: "mm"}]]);
 
 const measurement07 = new Map([     //Wetterstation
     ["t1", {name: "Temperatur, innen", type: "number", unit: "°C"}], 
     ["t2", {name: "Temperatur, außen", type: "number", unit: "°C"}], 
     ["h",  {name: "Luftfeuchte, innen", type: "number", unit: "%"}], 
-    ["h2", {name: "Luftfeuchte, außen", type: "number", unit: "%"}], 
-    ["ts", {name: "Timestamp", type: "number", unit: "sec"}],
-    ["lb", {name: "Low Battery", type: "boolean", unit: ""}]]);
+    ["h2", {name: "Luftfeuchte, außen", type: "number", unit: "%"}]]);
 
 const measurement10 =  new Map([    //Kontaktsensor
-    ["w", {name: "Kontakt", type: "boolean", unit: ""}], 
-    ["ts", {name: "Timestamp", type: "number", unit: "sec"}],
-    ["lb", {name: "Low Battery", type: "boolean", unit: ""}]]);
+    ["w", {name: "Kontakt", type: "boolean", unit: ""}]]);
 
 const measurement0B = new Map([  //Windsensor
     ["ws", {name: "Windgeschwindigkeit", type: "string", unit: "m/s"}],
     ["wg", {name: "Böe", type: "string", unit: "m/s"}],
-    ["wd", {name: "Windrichtung", type: "number", unit: ""}],
-    ["ts", {name: "Timestamp", type: "number", unit: "sec"}],
-    ["lb", {name: "Low Battery", type: "boolean", unit: ""}]]);
+    ["wd", {name: "Windrichtung", type: "number", unit: ""}]]);
 
 
 // Hier werden für jede Geräte-Id der Name und das zu benutzende Measurement festgelegt.
@@ -83,9 +70,9 @@ let propertyArray = [
 
     { id: "0816B9D3591E",	name: "Sample Rain Sensor", data: measurement08},
 
-    { id: "10246A3EB617",	name: "Sample Contact Sensor" , data: measurement10},
+    { id: "0B0075E315BB",	name: "Sample Wind Sensor" , data: measurement0B}, 
 
-    { id: "0B0075E315BB",	name: "Sample Wind Sensor" , data: measurement0B}
+    { id: "10246A3EB617",	name: "Sample Contact Sensor" , data: measurement10}
 ];
 
 
@@ -105,10 +92,18 @@ let urlClientCmd = '/usr/bin/curl -d "deviceids=' + deviceidString + '" --http1.
 log("urlClientCommand: " + urlClientCmd, "debug");
 
 propertyArray.forEach (function(item, key) {
-    if (!existsObject(mobileAlertsPath + "Devices" + "." + item.id)) {
-        createState(mobileAlertsPath + "Devices" + "." + item.id, undefined, { "name": item.name, "type": "object", "read": true, "write": true});
+    let itemIdPath = mobileAlertsPath + "Devices" + "." + item.id;
+    
+    if (!existsObject(itemIdPath)) {
+        createState(itemIdPath, undefined, { "name": item.name, "type": "object", "read": true, "write": true});
+
+        //generelle Werte
+        createState(itemIdPath + ".lb", undefined, { "name": "Low Battery", "type": "boolean", "unit": "", "read": true, "write": true, "role": "data" });
+        createState(itemIdPath + ".ts", undefined, { "name": "Timestamp", "type": "number", "unit": "sec", "read": true, "write": true, "role": "data" });
+
+        //sensorspezifische Werte
         item.data.forEach (function(subitem, key) {
-            createState(mobileAlertsPath + "Devices" + "." + item.id + "." + key, undefined, { "name": subitem.name, "type": subitem.type, "unit": subitem.unit, "read": true, "write": true, "role": "data" });
+            createState(itemIdPath + "." + key, undefined, { "name": subitem.name, "type": subitem.type, "unit": subitem.unit, "read": true, "write": true, "role": "data" });
         });
     }
 });
@@ -146,19 +141,31 @@ exec(urlClientCmd, function (error, stdout, stderr) {
         }
 
         obj.devices.forEach (function(item) {
+            log(JSON.stringify(item), "debug");
+            let deviceIdPath = mobileAlertsPath + "Devices" + "." + item.deviceid;
+            
+            setState(deviceIdPath, {val: item, ack: true});
 
+            //generelle Werte
+            setState(deviceIdPath + ".lb", {val: item.lowbattery, ack: true});
+            setState(deviceIdPath + ".ts", {val: item["measurement"].ts, ack: true});
+
+            //sensorspezifische Werte
             let props = propertiesById.get(item.deviceid);
-
             for (var [key, subitem] of props.data) {
-
-                setState(mobileAlertsPath + "Devices" + "." + item.deviceid + "." + key, {val: item["measurement"][key], ack: true});
-
+                let val = item["measurement"][key];
+                if (val == 65295 || val == 43530) {
+                    /* If a sensor was not connected the value 43530 is returned.
+                       If the measurement of a sensor was out of range the value 65295 is returned.*/
+                    setState(deviceIdPath + "." + key, null);
+                } else {
+                    setState(deviceIdPath + "." + key, {val: val, ack: true});
+                }
             };
         });
 
-    } else {
-        log(stdout, "info");
-        log('Mobile Alerts: (2) Received object contains error "' +  obj.errorcode + '": ' + obj.errormessage + '(#' + execCounter + ", " + execDuration + ' sec).', 'error');
+    } else {  
+        log('Mobile Alerts: (2) Messsage in received object: "' +  obj.Message + '" (#' + execCounter + ", " + execDuration + ' sec).', 'warn');
     }
 
     receivingData = false;
@@ -167,7 +174,7 @@ exec(urlClientCmd, function (error, stdout, stderr) {
 
 getData();
 
-schedule('*/7 * * * *', function() {setTimeout(getData, 4.5 * 60000)});
+schedule('42 */7 * * * *', getData);
 
 
 
